@@ -1,5 +1,5 @@
 # Étape 1: Construire l'application en utilisant une image Maven
-FROM maven:3.6.3-jdk-8-slim AS build
+FROM maven:3.8.4-openjdk-8 AS build
 WORKDIR /app
 
 # Copier le pom.xml et installer les dépendances
