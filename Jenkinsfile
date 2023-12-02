@@ -14,7 +14,7 @@ pipeline {
         stage('Compilation du code') {
 
             steps {
-                scripts {
+                script {
                 sh './mvnw compile'
                 }
             }
