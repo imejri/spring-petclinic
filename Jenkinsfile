@@ -25,6 +25,12 @@ pipeline {
                 sh './mvnw test'
             }
         }
+        stage('package') {
+
+            steps {
+                sh './mvnw clean package'
+            }
+        }
     }
     post {
         success {
