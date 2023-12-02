@@ -2,6 +2,11 @@
 
 pipeline {
     agent any  // Build sur le contrôleur
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        // Configuration du cache Maven
+        mavenLocalRepo '.m2/repository'
+    }
     stages {
         stage('Compilation du code') {
 
