@@ -6,7 +6,7 @@ pipeline {
         stage('Compilation du code') {
 
             steps {
-                ./mvnw compile
+                mvnw compile
             }
         }
     }
