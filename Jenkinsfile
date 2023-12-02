@@ -14,6 +14,12 @@ pipeline {
                 sh './mvnw compile'
             }
         }
+        stage('Test unitaire') {
+
+            steps {
+                sh './mvnw test'
+            }
+        }
     }
     post {
         success {
