@@ -8,13 +8,13 @@ pipeline {
     environment {
         // Définir le chemin du répertoire local Maven
         MAVEN_LOCAL_REPO = "${WORKSPACE}/.m2/repository"
+        MAVEN_OPTS = "-Dmaven.repo.local=${env.MAVEN_LOCAL_REPO}"
     }
     stages {
         stage('Compilation du code') {
 
             steps {
                 scripts {
-                env.MAVEN_OPTS = "-Dmaven.repo.local=${env.MAVEN_LOCAL_REPO}"
                 sh './mvnw compile'
                 }
             }
