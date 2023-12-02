@@ -16,6 +16,7 @@ pipeline {
                 scripts {
                 env.MAVEN_OPTS = "-Dmaven.repo.local=${env.MAVEN_LOCAL_REPO}"
                 sh './mvnw compile'
+                }
             }
         }
         stage('Test unitaire') {
