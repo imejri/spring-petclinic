@@ -62,7 +62,7 @@ pipeline {
         stage ('build petclinic app image') {
             steps {
                 script {   
-                    docker build -t petclinic:0.1.0 .
+                   sh 'docker build -t petclinic:0.1.0 .'
                 }
             }
         } // stage
