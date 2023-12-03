@@ -102,7 +102,7 @@ pipeline {
 
     post {
         success {
-            echo 'Build application successfull'
+            echo 'Build application successfull'  
         }
     }
 }
