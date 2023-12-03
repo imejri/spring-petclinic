@@ -1,0 +1,47 @@
+/* Pipeline de Build de notre application petclinic */
+
+pipeline {
+
+    agent any  // Build sur le contrôleur
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
+
+    environment {
+        // Définir le chemin du répertoire local Maven
+        MAVEN_LOCAL_REPO = "${WORKSPACE}/.m2/repository"
+        MAVEN_OPTS = "-Dmaven.repo.local=${env.MAVEN_LOCAL_REPO}"
+    }
+
+    parameters {
+        string(name: 'VERSION', defaultValue: '', description: 'Put image Version')
+    }
+
+    stages {
+
+        stage ('checkout code') {
+            steps {
+                checkout scmGit(branches: 
+                [[name: '*/pipeline-1']], userRemoteConfigs: 
+                [[url: 'https://github.com/imejri/spring-petclinic.git']])
+            }
+        } // stage
+
+        stage('Compilation du code') {
+            agent {
+                docker { image 'maven:3.8.4-openjdk-8' }
+            }
+
+            steps {
+                script {
+                    mvn package -DskipTests
+                }
+            }
+        } // stage
+    } //stages
+    post {
+        success {
+            echo 'Build application successfull'  
+        }
+    } //post action
+} // pipeline
