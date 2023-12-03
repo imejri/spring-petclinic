@@ -14,6 +14,15 @@ pipeline {
     }
 
     stages {
+
+        stage ('checkout code') {
+            steps {
+                checkout scmGit(branches: 
+                [[name: '*/pipeline-1']], userRemoteConfigs: 
+                [[url: 'https://github.com/imejri/spring-petclinic.git']])
+            }
+        } // stage
+
         stage('Compilation du code') {
 
             steps {
@@ -22,7 +31,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Test unitaire') {
 
             steps {
@@ -31,7 +40,7 @@ pipeline {
             post {
                 success {
 
-                    junit 'petclinic-app/target/surefire-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml'
                 }
             } // post success
         }
