@@ -58,6 +58,14 @@ pipeline {
                 }
             } // post success
         } // stage
+
+        stage ('build petclinic app image') {
+            steps {
+                script {   
+                    docker build -t petclinic:0.1.0 .
+                }
+            }
+        } // stage
     }
 
     post {
