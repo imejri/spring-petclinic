@@ -13,6 +13,10 @@ pipeline {
         MAVEN_OPTS = "-Dmaven.repo.local=${env.MAVEN_LOCAL_REPO}"
     }
 
+    parameters {
+        parameters { string(name: 'VERSION', defaultValue: '', description: 'Put image Version') }
+    }
+
     stages {
 
         stage ('checkout code') {
@@ -62,7 +66,13 @@ pipeline {
         stage ('build petclinic app image') {
             steps {
                 script {   
-                   sh 'docker build -t petclinic:0.1.0 .'
+                    if ( params.VERSION.isEmpty() )
+                        {
+                            currentBuild.result = "FAILURE"
+                            throw new Exception("The Parameters VERSION is empty")
+                        }
+                        
+                   sh "docker build -t petclinic:${params.VERSION} ."
                 }
             }
         } // stage
@@ -74,12 +84,19 @@ pipeline {
                    sh '''
                     docker ps -q --filter "name=petclinic-app" | xargs -r docker stop
                     '''
-                   sh """
-                    docker run -d --name petclinic-app-${BUILD_NUMBER} -p 8081:8080 petclinic:0.1.0
-                    """
 
+                   sh """
+                    docker run -d --name petclinic-app-${BUILD_NUMBER} -p 8081:8080 petclinic:${params.VERSION}
+                    """
                 }
             }
+            post {
+                failure {              
+                   
+                    sh 'docker ps -q --filter "name=petclinic-app" | xargs -r docker start'
+        }
+    }
+
         } // stage
     }
 
