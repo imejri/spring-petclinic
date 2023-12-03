@@ -5,7 +5,7 @@ FROM openjdk:8-jre-slim
 COPY  target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar petclinic.jar
 
 # Exposer le port sur lequel votre application s'exécute
-EXPOSE 8000
+EXPOSE 8080
 
 # Définir la commande pour exécuter l'application
 ENTRYPOINT ["java","-jar","petclinic.jar"]
