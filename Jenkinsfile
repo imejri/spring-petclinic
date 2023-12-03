@@ -14,7 +14,7 @@ pipeline {
     }
 
     parameters {
-        parameters { string(name: 'VERSION', defaultValue: '', description: 'Put image Version') }
+        string(name: 'VERSION', defaultValue: '', description: 'Put image Version')
     }
 
     stages {
@@ -71,7 +71,7 @@ pipeline {
                             currentBuild.result = "FAILURE"
                             throw new Exception("The Parameters VERSION is empty")
                         }
-                        
+
                    sh "docker build -t petclinic:${params.VERSION} ."
                 }
             }
