@@ -34,7 +34,7 @@ pipeline {
 
             steps {
                 script {
-                    mvn package -DskipTests
+                    sh 'mvn package -DskipTests'
                 }
             }
         } // stage
