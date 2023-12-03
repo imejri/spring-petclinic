@@ -74,7 +74,10 @@ pipeline {
                    sh '''
                     docker ps -q --filter "name=petclinic-app" | xargs -r docker stop
                     '''
-                   sh 'docker run -d --name petclinic-app-"${BUID_NUMBER}" -p 8081:8080 petclinic:0.1.0'
+                   sh """
+                    docker run -d --name petclinic-app-${BUILD_NUMBER} -p 8081:8080 petclinic:0.1.0
+                    """
+
                 }
             }
         } // stage
