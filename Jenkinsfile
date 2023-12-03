@@ -66,6 +66,14 @@ pipeline {
                 }
             }
         } // stage
+
+        stage ('Start petclinic container') {
+            steps {
+                script {   
+                   sh 'docker run -d --name petclinic-app -p 8081:8000 petclinic:0.1.0'
+                }
+            }
+        } // stage
     }
 
     post {
