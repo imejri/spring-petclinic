@@ -18,12 +18,12 @@ pipeline {
 
         stage('Compilation du code') {
             agent {
-                docker { image 'maven:3.8.4-openjdk-8' }
+                docker { image 'node:hydrogen-slim' }
             }
 
             steps {
                 script {
-                    sh 'mvn package -DskipTests'
+                    sh 'node --version'
                 }
             }
         } // stage
