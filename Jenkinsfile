@@ -67,8 +67,6 @@ pipeline {
 
             steps {
                 sh 'java -jar $WORKSPACE/target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar' 
-                sh 'sleep 10'
-                sh 'ps -ef | grep spring-petclinic | grep -v grep' // Vérification du processus
             }
             post {
 
