@@ -66,8 +66,8 @@ pipeline {
         stage('launch application') { //démarrage de l'app spring petclinc
 
             steps {
-                sh 'nohup java -jar $WORKSPACE/target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar > output.log 2>&1 & disown'
-                sh 'sleep 20'
+                sh 'java -jar $WORKSPACE/target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar' 
+                sh 'sleep 10'
                 sh 'ps -ef | grep spring-petclinic | grep -v grep' // Vérification du processus
             }
             post {
