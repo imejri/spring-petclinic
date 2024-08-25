@@ -66,7 +66,7 @@ pipeline {
         stage('launch application') { //démarrage de l'app spring petclinc
 
             steps {
-                sh 'java -jar $WORKSPACE/target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar'
+                sh 'nohup java -jar $WORKSPACE/target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar &'
             }
             post {
 
