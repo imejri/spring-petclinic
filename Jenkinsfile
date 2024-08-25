@@ -66,6 +66,7 @@ pipeline {
         stage('launch application') { //démarrage de l'app spring petclinc
 
             steps {
+                sh 'pwd'
                 sh 'java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar'
             }
             post {
