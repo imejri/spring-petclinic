@@ -117,7 +117,8 @@ pipeline {
 
     post {
         success {
-            echo 'Build application successfull'  
+            echo 'Build application successfull'
+            cleanWs()
         }
     } //post
 } // pipeline
