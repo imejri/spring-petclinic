@@ -63,6 +63,21 @@ pipeline {
             } // post success
         } // stage
 
+        stage('launch application') { //démarrage de l'app spring petclinc
+
+            steps {
+                sh 'java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar'
+            }
+            post {
+
+                // Archive des *.jar files si le build est ok
+                success {
+                    echo " --- l'application spring petclinic démarre avec succès ---"
+                    echo "--- Pour se connecter: http://jenkins.lab.local:8081 ---"
+                }
+            } // post success
+        } // stage
+
         /* stage ('build petclinic app image') {
             steps {
                 script {   
