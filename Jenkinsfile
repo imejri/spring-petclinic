@@ -19,7 +19,7 @@ pipeline {
 
     stages {
 
-        stage ('checkout code') {
+        stage ('checkout code') { // clone du code avec le dernier commit
             steps {
                 checkout scmGit(branches: 
                 [[name: '*/pipeline-1']], userRemoteConfigs: 
@@ -44,12 +44,12 @@ pipeline {
             post {
                 success {
 
-                    junit 'target/surefire-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml' // Export des rapports Junit
                 }
             } // post success
         }
 
-        stage('package') {
+        stage('package') { //création du jar
 
             steps {
                 sh './mvnw clean package'
@@ -63,7 +63,7 @@ pipeline {
             } // post success
         } // stage
 
-        stage ('build petclinic app image') {
+        /* stage ('build petclinic app image') {
             steps {
                 script {   
                     if ( params.VERSION.isEmpty() )
@@ -88,21 +88,21 @@ pipeline {
                    sh """
                     docker run -d --name petclinic-app-${BUILD_NUMBER} -p 8081:8080 petclinic:${params.VERSION}
                     """
-                }
-            }
+                } // script
+            } //steps
             post {
                 failure {              
                    
                     sh 'docker ps -q --filter "name=petclinic-app" | xargs -r docker start'
-        }
-    }
+            } // failure
+        } //post 
 
-        } // stage
-    }
+        } // stage */
+    } //stages
 
     post {
         success {
             echo 'Build application successfull'  
         }
-    }
-}
+    } //post
+} // pipeline
