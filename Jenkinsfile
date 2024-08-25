@@ -67,6 +67,7 @@ pipeline {
 
             steps {
                 sh 'nohup java -jar $WORKSPACE/target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar > output.log 2>&1 &'
+                sh 'sleep 20'
             }
             post {
 
