@@ -1,4 +1,5 @@
 # Étape 1: Construire l'application en utilisant une image Maven
+## Premier stage de nom build
 FROM maven:3.8.4-openjdk-8 AS build
 WORKDIR /app
 
@@ -11,6 +12,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Étape 2: Créer l'image de l'application en utilisant une image Java
+## second stage de démarrage de l'application
 FROM openjdk:8-jre-slim
 WORKDIR /app
 
